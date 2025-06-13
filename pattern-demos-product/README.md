@@ -174,6 +174,16 @@ The validation pattern shows some typical validation scenarios for
   Basic validation:
   ![image](https://github.com/user-attachments/assets/18ce21cc-6714-45c3-b02b-d1859f34c481)
 
+### Zip Demo
+
+This demo show an examples how to use zip feature 
+
+You can upload files from computer, it will process and automatic add to existing zip file or create new zip file if not existed.\
+You can click button download to download the zip file that contains all the file you uploaded before.\
+You can also click un-zip the zip file to unzip all files to your local designer folder.
+
+  Zip Demo:
+![image](https://github.com/user-attachments/assets/f408081e-e40c-4f22-8425-5812f1334160)
 
 #### Managed beans
 

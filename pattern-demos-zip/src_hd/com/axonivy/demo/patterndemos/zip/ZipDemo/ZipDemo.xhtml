@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:ic="http://ivyteam.ch/jsf/component"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+<h:body>
+	<ui:composition template="/layouts/frame-10-full-width.xhtml">
+		<ui:define name="title">ZipManagement</ui:define>
+		<ui:define name="content">
+
+			<h:form id="form">
+				<h:outputText rendered="#{data.ctrl.zipFile ne null}"
+					styleClass="mb-2 block "
+					value="Absolute path: #{data.ctrl.zipFile.absolutePath}" />
+
+				<h:panelGroup styleClass="mb-2 block ">
+
+					<h:outputText rendered="#{data.ctrl.zipFile ne null}"
+						value="File name: #{data.ctrl.zipFile.name} (#{data.ctrl.fileSizeDisplay})" />
+
+					<p:commandLink id="download"
+						rendered="#{data.ctrl.zipFile ne null}" styleClass="ml-2"
+						title="Download file" process="@this"
+						actionListener="#{logic.downloadZipFile(data.ctrl.zipFile)}">
+						<h:outputText class="fa-solid fa-download" />
+						<p:fileDownload value="#{data.fileContent}" />
+					</p:commandLink>
+
+					<p:commandLink id="unzip" rendered="#{data.ctrl.zipFile ne null}"
+						styleClass="ml-2" title="Un-zip file" process="@this"
+						update="form" actionListener="#{data.ctrl.onUnzipFile}">
+						<h:outputText class="fa-solid fa-box-open" />
+					</p:commandLink>
+
+				</h:panelGroup>
+
+				<h:outputText id="unzipPath" styleClass="mb-2 block "
+					rendered="#{data.ctrl.unzipFolder ne null}"
+					value="#{data.ctrl.unzipFolder}" />
+
+				<h3>Files in zip</h3>
+
+				<p:dataTable id="zipFiles" widgetVar="zipFiles"
+					value="#{data.ctrl.zipModels}" var="zipModel" stripedRows="true"
+					paginatorAlwaysVisible="true" paginatorPosition="bottom"
+					resizableColumns="true" sortMode="single" multiViewState="true"
+					rowKey="#{zipModel.fileName}">
+
+					<p:column headerText="File name">
+						<h:outputText value="#{zipModel.fileName}"
+							title="#{zipModel.fileName}" />
+					</p:column>
+
+					<p:column headerText="File size">
+						<h:outputText value="#{zipModel.sizeDisplay}"
+							title="#{zipModel.sizeDisplay}" />
+					</p:column>
+
+					<p:column headerText="File Compressed Size">
+						<h:outputText value="#{zipModel.compressedSizeDisplay}"
+							title="#{zipModel.sizeDisplay}" />
+					</p:column>
+
+					<p:columnGroup type="footer">
+						<p:row>
+							<p:column style="text-align:right" footerText="Totals:" />
+							<p:column>
+								<f:facet name="footer">
+									<h:outputText value="#{data.ctrl.totalSize}" />
+								</f:facet>
+							</p:column>
+							<p:column>
+								<f:facet name="footer">
+									<h:outputText value="#{data.ctrl.totalCompressedSize}" />
+								</f:facet>
+							</p:column>
+						</p:row>
+					</p:columnGroup>
+				</p:dataTable>
+
+				<div class="field col-12">
+					<p:fileUpload id="uploadQueryAttachment" mode="simple"
+						skinSimple="true" multiple="true" auto="true"
+						chooseIcon="pi pi-upload" styleClass="query-upload" update="form"
+						chooseButtonTitle="" listener="#{data.ctrl.onFilesUpload}"
+						sizeLimit="20000000">
+					</p:fileUpload>
+				</div>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

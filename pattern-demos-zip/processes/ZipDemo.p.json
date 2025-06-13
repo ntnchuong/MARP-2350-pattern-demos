@@ -1,0 +1,61 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "id" : "19753B40DB6E4ADE",
+  "config" : {
+    "data" : "com.axonivy.demo.patterndemos.pattern.demos.zip.ZipDemoData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "Zip Demo",
+      "config" : {
+        "signature" : "ZipDemo",
+        "request" : {
+          "name" : "Zip Demo"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f3" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 496, "y" : 64 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "DialogCall",
+      "name" : "Zip File Management",
+      "config" : {
+        "dialog" : "com.axonivy.demo.patterndemos.zip.ZipDemo:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 304, "y" : 64 },
+        "size" : { "width" : 136, "height" : 62 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f1", "color" : "default" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "ProcessAnnotation",
+      "name" : [
+        "This demo creates a zip process run by uploading some files.",
+        "",
+        "User can upload files from computer, it will automatic add to existing zip file or create new zip file if not existed.",
+        "",
+        "After that you can download the zip file that contains all the file you uploaded.",
+        "",
+        "You can also un-zip the zip file to your local designer folder."
+      ],
+      "visual" : {
+        "at" : { "x" : 808, "y" : 96 },
+        "size" : { "width" : 486, "height" : 150 }
+      }
+    } ]
+}
